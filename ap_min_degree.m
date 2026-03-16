@@ -1,4 +1,4 @@
-function [P] = ap_min_degree4(Amtx)
+function [P] = ap_min_degree(Amtx)
     n = size(Amtx,1);
     
     % We keep track of the following:

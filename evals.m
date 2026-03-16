@@ -1,5 +1,5 @@
-%  matrices = {'msc01050', 'bcsstk38', 'bcsstk36', 's3dkt3m2', 'apache2', 'audikw_1'}; 
-matrices = {'s3dkt3m2'}; 
+ matrices = {'msc01050', 'bcsstk38', 'bcsstk36', 's3dkt3m2', 'apache2', 'audikw_1'}; 
+%  matrices = {'s3dkt3m2'}; 
 colNames = {'Matrix', 'N_Rows', 'NNZ_Original', ...
             'NNZ_Natural', 'Time_Ord_Natural', 'Time_Chol_Natural', ...
             'NNZ_RCM', 'Time_Ord_RCM', 'Time_Chol_RCM', ...
@@ -23,18 +23,11 @@ for m = 1:length(matrices)
     tic; F_rcm = chol(A(P_rcm,P_rcm), 'lower'); t_chol_rcm = toc;
     nnz_rcm = nnz(F_rcm);
     
-    % if m <= 3
     tic; P_exa = min_degree(A); t_ord_exa = toc;
     tic; F_exa = chol(A(P_exa,P_exa), 'lower'); t_chol_exa = toc;
     nnz_exa = nnz(F_exa);
-    % else
-    % fprintf('Skipping Exact MD for this matrix... \n');
-    % t_ord_exa = NaN; 
-    % t_chol_exa = NaN; 
-    % nnz_exa = NaN;
-    % end
 
-    tic; P_app = ap_min_degree3(A); t_ord_app = toc;
+    tic; P_app = ap_min_degree(A); t_ord_app = toc;
     tic; F_app = chol(A(P_app,P_app), 'lower'); t_chol_app = toc;
     nnz_app = nnz(F_app);
     
